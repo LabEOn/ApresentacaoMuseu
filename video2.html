@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Museu virtual</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; background: black; }
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+    }
+
+    #voltarBtn {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 32px;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #voltarBtn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <video id="novoVideo" autoplay muted playsinline>
+    <source src="assets/videoMuseu.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo.
+  </video>
+
+  <button id="voltarBtn" onclick="window.location.href='index.html'">
+    <i class="bi bi-arrow-left"></i>
+  </button>
+
+  <script>
+    const novoVideo = document.getElementById('novoVideo');
+
+    // Quando o vídeo terminar, volta automaticamente para a página principal
+    novoVideo.addEventListener('ended', () => {
+      window.location.href = 'index.html';
+    });
+  </script>
+
+</body>
+</html>

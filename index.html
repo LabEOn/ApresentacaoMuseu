@@ -41,20 +41,6 @@
       transition: 0.3s;
     }
 
-    #playBtn {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: rgba(255, 255, 255, 0.85);
-      padding: 15px 30px;
-      font-size: 16px;
-      border-radius: 5px;
-    }
-
-    #playBtn:hover {
-      background: white;
-    }
-
     #replayBtn {
       top: 50%;
       left: 50%;
@@ -69,22 +55,38 @@
     }
 
     #linkInferior {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
       background: rgba(0, 0, 0, 0.6);
       color: white;
       padding: 30px 60px;
       text-decoration: none;
       border-radius: 5px;
-      z-index: 2;
-      font-size: 48px;
-      display: none;
+      font-size: 34px;
     }
 
     #linkInferior:hover {
       background: rgba(0, 0, 0, 0.8);
+    }
+
+    #botaoContainerTopo {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      z-index: 2;
+    }
+
+    #botaoContainerBaixo {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      justify-content: space-around;
+      width: 80%;
+      z-index: 2;
     }
   </style>
 </head>
@@ -95,44 +97,51 @@
     Seu navegador não suporta vídeo.
   </video>
 
-  <button id="playBtn" class="botao">Play</button>
-  <button id="replayBtn" class="botao"><i class="bi bi-arrow-clockwise"></i></button>
-  <a id="linkInferior" href="https://forms.gle/7qDkE4aCZpfGfjWw6" target="_blank">Ir para o formulário</a>
+  <!-- Botão central -->
+  <button id="replayBtn" class="botao"><i class="bi bi-play-circle"></i></button>
+
+  <div id="botaoContainerTopo">
+    <a id="linkInferior" href="https://forms.gle/7qDkE4aCZpfGfjWw6" target="_blank">Registre sua presença</a>
+    <a id="linkInferior" href="video2.html">Conheça o Museu virtual</a>
+  </div>
+
+  <div id="botaoContainerBaixo">
+    <a id="linkInferior" href="https://view.genially.com/68e814f25479830ef4b4811f/interactive-content-museu-do-conhecimento" target="_blank">Quem sou?</a>
+  </div>
 
   <script>
     const video = document.getElementById('meuVideo');
-    const playBtn = document.getElementById('playBtn');
     const replayBtn = document.getElementById('replayBtn');
-    const linkInferior = document.getElementById('linkInferior');
+    const topo = document.getElementById('botaoContainerTopo');
+    const baixo = document.getElementById('botaoContainerBaixo');
 
-    // Mostrar frame inicial
+    // Estado inicial: botões e play visíveis
     window.addEventListener('DOMContentLoaded', () => {
-      video.currentTime = 0;
       video.pause();
-      playBtn.style.display = 'block';
-      replayBtn.style.display = 'none';
+      replayBtn.style.display = 'block';
+      topo.style.display = 'flex';
+      baixo.style.display = 'flex';
+      replayBtn.innerHTML = '<i class="bi bi-play-circle"></i>';
     });
 
-    // Clique no botão de Play
-    playBtn.addEventListener('click', () => {
+    // Clique no play
+    replayBtn.addEventListener('click', () => {
       video.currentTime = 0;
-      video.volume = 1;
       video.play();
-      playBtn.style.display = 'none';
+
+      // Esconde tudo durante o vídeo
+      replayBtn.style.display = 'none';
+      topo.style.display = 'none';
+      baixo.style.display = 'none';
     });
 
     // Quando o vídeo termina
     video.addEventListener('ended', () => {
+      // Mostra tudo novamente
       replayBtn.style.display = 'block';
-      linkInferior.style.display = 'block';
-    });
-
-    // Clique no botão de Replay
-    replayBtn.addEventListener('click', () => {
-      video.currentTime = 0;
-      video.play();
-      replayBtn.style.display = 'none';
-      linkInferior.style.display = 'none';
+      topo.style.display = 'flex';
+      baixo.style.display = 'flex';
+      replayBtn.innerHTML = '<i class="bi bi-arrow-clockwise"></i>';
     });
   </script>
 
